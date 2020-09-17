@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="chatlist--area">
-        <div class="chatlist" v-for="item in chatlist" :key="item" @click="setActiveChat(item)">
+        <div class="chatlist" v-for="item in chatlist" :key="item.chatId" @click="setActiveChat(item)">
           <ChatListitem :chatlist="item" :active="true"/>
         </div>
       </div>
@@ -197,7 +197,6 @@ header {
 
 .chatlist {
   background: #fff;
-
 }
 
 .chatlist--area {
