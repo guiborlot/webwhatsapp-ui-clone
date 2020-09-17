@@ -48,13 +48,16 @@
         </div>
       </div>
       <div class="chatlist--area">
-        <div class="chatlist" v-for="item in chatlist" :key="item">
-          <ChatListitem/>
+        <div class="chatlist" v-for="item in chatlist" :key="item" @click="setActiveChat(item)">
+          <ChatListitem :chatlist="item" :active="true"/>
         </div>
       </div>
 
     </div>
-    <div class="contentarea">
+    <div class="contentarea" v-if="activeChat.chatId != undefined">
+      <ChatWindow/>
+    </div>
+    <div class="contentarea" v-if="activeChat.chatId === undefined">
       <ChatIntro/>
     </div>
   </div>
@@ -63,19 +66,48 @@
 <script>
 import ChatListitem from "@/components/ChatListitem";
 import ChatIntro from "@/components/ChatIntro";
+import ChatWindow from "@/components/ChatWindow";
 
 export default {
   name: 'App',
   components: {
     ChatListitem,
-    ChatIntro
+    ChatIntro,
+    ChatWindow
   },
   data() {
     return {
-      chatlist: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+      chatlist: [
+        {
+          chatId: 1,
+          title: 'Fulano de tal',
+          image: 'https://w3schools.com/howto/img_avatar2.png'
+        },
+        {
+          chatId: 2,
+          title: 'Fulano de tal',
+          image: 'https://w3schools.com/howto/img_avatar2.png'
+        },
+        {
+          chatId: 3,
+          title: 'Fulano de tal',
+          image: 'https://w3schools.com/howto/img_avatar2.png'
+        },
+        {
+          chatId: 4,
+          title: 'Fulano de tal',
+          image: 'https://w3schools.com/howto/img_avatar2.png'
+        },
+      ],
+      activeChat: {},
+      active: {}
     }
   },
-  methods: {},
+  methods: {
+    setActiveChat(el){
+      this.activeChat = el;
+    }
+  },
   mounted() {
 
   }
@@ -168,17 +200,17 @@ header {
 
 }
 
-.chatlist--area{
+.chatlist--area {
   flex: 1;
   overflow-y: auto;
 }
 
-.chatlist--area::-webkit-scrollbar{
+.chatlist--area::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
-.chatlist--area::-webkit-scrollbar-thumb{
+.chatlist--area::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.2);
 }
 

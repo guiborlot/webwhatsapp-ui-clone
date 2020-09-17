@@ -1,9 +1,9 @@
 <template>
-  <div class="chatListItem">
-    <img class="chatListItem--avatar" src="https://w3schools.com/howto/img_avatar2.png" alt="" />
+  <div class="chatListItem" :class="{active : isActive}">
+    <img class="chatListItem--avatar" :src="chatlist.image" alt="" />
     <div class="chatListItem--lines">
       <div class="chatListItem--line">
-        <div class="chatListItem--name">Guilherme Borlot</div>
+        <div class="chatListItem--name">{{chatlist.title}}</div>
         <div class="chatListItem--date">19:00</div>
       </div>
       <div class="chatListItem--line">
@@ -17,7 +17,11 @@
 
 <script>
 export default {
-name: "ChatListitem"
+  name: "ChatListitem",
+  props:{
+    chatlist: Object,
+    isActive: Boolean
+  }
 }
 </script>
 
@@ -31,6 +35,10 @@ name: "ChatListitem"
 
   .chatListItem:hover{
     background: #f5f5f5;
+  }
+
+  .active{
+    background: #ebebeb;
   }
 
   .chatListItem--avatar{
